@@ -1,9 +1,7 @@
 
 services:
   api:
-    build:
-      context: ./Backend
-      dockerfile: Dockerfile
+    image: maincra2030/zeus:latest
     container_name: management_api
     ports:
       - "5000:5000"
