@@ -3,8 +3,8 @@ services:
   api:
     image: maincra2030/zeus:latest
     container_name: management_api
-    ports:
-      - "5000:5000"
+    expose:
+      - "5000"
     env_file:
       - .env
     depends_on:
@@ -18,7 +18,7 @@ services:
       dockerfile: Dockerfile
     container_name: management_frontend
     ports:
-      - "3000:80"
+      - "80"
     env_file:
       - .env
     depends_on:
