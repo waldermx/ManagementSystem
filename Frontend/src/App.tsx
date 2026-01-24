@@ -4,7 +4,7 @@ function App() {
   
   const handleClick = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/weatherforecast`)
+      const response = await fetch(`/weatherforecast`)
       const data = await response.json()
       console.log('Respuesta del backend:', data)
     } catch (error) {
