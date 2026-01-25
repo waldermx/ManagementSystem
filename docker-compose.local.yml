@@ -1,0 +1,45 @@
+
+services:
+  api:
+    image: maincra2030/zeus:latest
+    expose:
+      - "5000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+    networks:
+      - management_net
+
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      - VITE_API_BASE_URL=${VITE_API_BASE_URL}
+    depends_on:
+      - api
+    networks:
+      - management_net
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: management_db
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: ${SA_PASSWORD}
+      ACCEPT_EULA: "Y"
+    volumes:
+      - sql_data:/var/opt/mssql
+    networks:
+      - management_net
+
+volumes:
+  sql_data:
+
+networks:
+  management_net:
+    driver: bridge
