@@ -1,11 +1,12 @@
 import './App.css'
+import type { WeatherForecast } from "./api/weather.api";
+import { getWeatherForecast } from "./api/weather.api";
 
 function App() {
   
   const handleClick = async () => {
     try {
-      const response = await fetch(`/weatherforecast`)
-      const data = await response.json()
+      const data: WeatherForecast[] = await getWeatherForecast();
       console.log('Respuesta del backend:', data)
     } catch (error) {
       console.error('Error al conectar con el backend:', error)
